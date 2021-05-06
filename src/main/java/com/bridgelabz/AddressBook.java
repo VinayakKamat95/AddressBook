@@ -13,15 +13,18 @@ public class AddressBook {
         boolean status = true;
         do {
             System.out.println("Choose Operation you want to do");
-            System.out.println("1. Add\t 2. print\t 3. Back");
+            System.out.println("1. Add\t 2.Edit\t 3. Print\t 4. Back");
             switch (scanner.nextInt()) {
                 case 1:
                     add();
                     break;
                 case 2:
-                    print();
+                    edit();
                     break;
                 case 3:
+                    print();
+                    break;
+                case 4:
                     status = false;
                     break;
             }
@@ -64,6 +67,57 @@ public class AddressBook {
         person.setEmail(email);
 
         list.add(person);
+
+    }
+
+    public static void edit() {
+        System.out.println("Enter your First name:");
+        String firstName = scanner.next();
+
+        Iterator<Person> iterator = list.listIterator();
+
+        while (iterator.hasNext()) {
+            Person person = iterator.next();
+
+            if (firstName.equals(person.getFirstname())) {
+                System.out.println("Choose field you want to add:");
+                System.out.println("1.Last Name\t 2.Phone Number\t 3.City\t 4.Zip\t5. State\t 6.Address\t 7.Email");
+                switch (scanner.nextInt()) {
+                    case 1:
+                        System.out.println("Re-Correct your lastname");
+                        person.setLastname(scanner.next());
+                        break;
+                    case 2:
+                        System.out.println("Re-Correct your Phone Number");
+                        person.setNumber(scanner.nextLong());
+                        break;
+                    case 3:
+                        System.out.println("Re-Correct your City");
+                        person.setCity(scanner.next());
+                        break;
+                    case 4:
+                        System.out.println("Re-Correct your Zip");
+                        person.setZip(scanner.nextInt());
+                        break;
+                    case 5:
+                        System.out.println("Re-Correct your State");
+                        person.setState(scanner.next());
+                        break;
+                    case 6:
+                        System.out.println("Re-Correct your address");
+                        person.setAddress(scanner.next());
+                        break;
+                    case 7:
+                        System.out.println("Re-Correct your Email");
+                        person.setEmail(scanner.next());
+                        break;
+                    default:
+                        System.out.println("select proper option");
+                        break;
+                }
+
+            }
+        }
 
     }
 
