@@ -13,7 +13,7 @@ public class AddressBook {
         boolean status = true;
         do {
             System.out.println("Choose Operation you want to do");
-            System.out.println("1. Add\t 2.Edit\t 3. Print\t 4. Back");
+            System.out.println("1. Add\t 2.Edit\t 3. Delete\t 4. Print\t 5. Back");
             switch (scanner.nextInt()) {
                 case 1:
                     add();
@@ -22,9 +22,12 @@ public class AddressBook {
                     edit();
                     break;
                 case 3:
-                    print();
+                    delete();
                     break;
                 case 4:
+                    print();
+                    break;
+                case 5:
                     status = false;
                     break;
             }
@@ -119,6 +122,21 @@ public class AddressBook {
             }
         }
 
+    }
+
+    public static void delete() {
+        System.out.println("Enter your First name:");
+        String firstName = scanner.next();
+
+        Iterator<Person> iterator = list.listIterator();
+        while (iterator.hasNext()) {
+            Person person = iterator.next();
+
+            if (firstName.equals(person.getFirstname())) {
+                list.remove(person);
+                return;
+            }
+        }
     }
 
     public static void print() {
