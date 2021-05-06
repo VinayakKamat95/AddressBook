@@ -24,6 +24,10 @@ public class Person {
         this.email = email;
     }
 
+    public Person() {
+
+    }
+
     public String getLastname() {
         return lastname;
     }
@@ -93,6 +97,6 @@ public class Person {
         return "Name: " + firstname + " " + lastname + "\n" +
                 "address: " + address + "\n" + "City: " + city +
                 "\n" +"State: " + state + "\n" + "Zip: " + zip +
-                "\n" + "Number# " + number + "\n" + "Email: " + email;
+                "\n" + "Number# " + number + "\n" + "Email: " + email + "\n";
     }
 }
