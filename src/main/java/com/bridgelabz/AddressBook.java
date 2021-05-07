@@ -5,6 +5,7 @@ import java.util.*;
 public class AddressBook {
 
      Scanner scanner = new Scanner(System.in);
+     ArrayList<Person> personInCity = new ArrayList<>();
      HashMap<String, LinkedList<Person>> myAddressBookDict = new HashMap<>(); //AddressBook Dictionary using Map
 
     /* createAddressBook() create AddressBook */
@@ -32,6 +33,11 @@ public class AddressBook {
                 Person person = new Person();
                 System.out.println("Enter the First name:");
                 String firstName = scanner.next();
+                while (!searchPersonInTheAddressBook(addressBook_Name, firstName)) {
+                    System.out.println("Person already present!\n");
+                    firstName = scanner.next();
+                    searchPersonInTheAddressBook(addressBook_Name, firstName);
+                }
                 person.setFirstname(firstName);
                 System.out.println("Enter the Last name:");
                 String lastName = scanner.next();
@@ -144,6 +150,14 @@ public class AddressBook {
         }
     }
 
+    /* Search Person By AddressBook Name And FirstName */
+    public boolean searchPersonInTheAddressBook(String addressBookName, String firstName) {
+
+        return myAddressBookDict.get(addressBookName).stream()
+                    .filter(record -> record.getFirstname().equals(firstName))
+                    .findFirst().isEmpty();
+    }
+
     /* printAddressBookDict() Prints AddressBooks and Contacts in AddressBook */
     public void printAddressBookDict() {
         if(!myAddressBookDict.isEmpty()){
@@ -161,6 +175,7 @@ public class AddressBook {
             }
         }
     }
+
 
     /* staticEntries() Taking Static Entries to AddressBook */
     public void staticEntries() {
