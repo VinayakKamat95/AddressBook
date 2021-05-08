@@ -7,6 +7,7 @@ public class AddressBook {
      Scanner scanner = new Scanner(System.in);
      HashMap<String, LinkedList<Person>> myAddressBookDict = new HashMap<>(); //AddressBook Dictionary using Map
      ArrayList<String> personInCityOrState;
+     HashMap<String, ArrayList> personInCityOrStateDict;
 
     /* createAddressBook() create AddressBook */
     public void createAddressBook() {
@@ -166,9 +167,10 @@ public class AddressBook {
         System.out.println("1.City\t 2.State\t 3.Back");
         switch (scanner.nextInt()) {
             case 1 :
+                personInCityOrStateDict = new HashMap<>();
                 personInCityOrState = new ArrayList<>();
                 System.out.println("Enter City:");
-                Object city =  scanner.next();
+                String city =  scanner.next();
                 for (String code : keySet) {
                      myAddressBookDict.get(code).stream().forEach(person -> {
                          if (person.getCity().equals(city)) {
@@ -176,13 +178,16 @@ public class AddressBook {
                          }
                      });
                 }
-                    System.out.println("search Person In A City:" + city + ":" + personInCityOrState);
-                    System.out.println(personInCityOrState.size());
-                    break;
+                System.out.println("search Person In A City:" + city + ":" + personInCityOrState);
+                System.out.println(personInCityOrState.size());
+                personInCityOrStateDict.put(city, personInCityOrState);
+                System.out.println(personInCityOrStateDict);
+                break;
             case 2 :
+                personInCityOrStateDict = new HashMap<>();
                 personInCityOrState = new ArrayList<>();
                 System.out.println("Enter State:");
-                Object state =  scanner.next();
+                String state =  scanner.next();
                 for (String code : keySet) {
                     myAddressBookDict.get(code).stream().forEach(person -> {
                           if (person.getState().equals(state)) {
@@ -192,6 +197,8 @@ public class AddressBook {
                 }
                 System.out.println("search Person In A State:" + state + ":" + personInCityOrState);
                 System.out.println(personInCityOrState.size());
+                personInCityOrStateDict.put(state, personInCityOrState);
+                System.out.println(personInCityOrStateDict);
                 break;
             case 3:
                 break;
