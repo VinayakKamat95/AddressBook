@@ -26,7 +26,7 @@ public class AddressBook {
         System.out.println("Enter AddressBook Name");
         String addressBook_Name = scanner.next();
         try {
-            if (!myAddressBookDict.containsKey(addressBook_Name)){
+            if (!myAddressBookDict.containsKey(addressBook_Name)) {
                 throw new AddressBookException("AddressBook is not present");
             }
             else {
@@ -62,7 +62,7 @@ public class AddressBook {
                 person.setEmail(email);
                 myAddressBookDict.get(addressBook_Name).add(person);
             }
-        }catch (AddressBookException e){
+        }catch (AddressBookException e) {
             e.fillInStackTrace();
         }
     }
@@ -72,7 +72,7 @@ public class AddressBook {
         System.out.println("Enter AddressBook Name");
         String addressBook_Name = scanner.next();
         try {
-            if (!myAddressBookDict.containsKey(addressBook_Name)){
+            if (!myAddressBookDict.containsKey(addressBook_Name)) {
                 throw new AddressBookException("AddressBook is not present");
             }
             else {
@@ -123,7 +123,7 @@ public class AddressBook {
                     System.out.println(person);
                 } while (status);
             }
-        }catch (AddressBookException a){
+        }catch (AddressBookException a) {
             a.fillInStackTrace();
         }
     }
@@ -145,7 +145,7 @@ public class AddressBook {
                 myAddressBookDict.get(addressBook_Name).remove(person);
                 System.out.println(myAddressBookDict.get(addressBook_Name));
             }
-        }catch(AddressBookException a){
+        }catch(AddressBookException a) {
                 a.fillInStackTrace();
         }
     }
@@ -200,7 +200,7 @@ public class AddressBook {
 
     /* printAddressBookDict() Prints AddressBooks and Contacts in AddressBook */
     public void printAddressBookDict() {
-        if(!myAddressBookDict.isEmpty()){
+        if(!myAddressBookDict.isEmpty()) {
             System.out.println(myAddressBookDict.keySet());
             System.out.println("Enter AddressBook Name");
             String addressBook_Name = scanner.next();
