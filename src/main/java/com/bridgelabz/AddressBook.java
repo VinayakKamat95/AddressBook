@@ -5,8 +5,8 @@ import java.util.*;
 public class AddressBook {
 
      Scanner scanner = new Scanner(System.in);
-     ArrayList<Person> personInCity = new ArrayList<>();
      HashMap<String, LinkedList<Person>> myAddressBookDict = new HashMap<>(); //AddressBook Dictionary using Map
+     ArrayList<String> personInCityOrState;
 
     /* createAddressBook() create AddressBook */
     public void createAddressBook() {
@@ -33,10 +33,10 @@ public class AddressBook {
                 Person person = new Person();
                 System.out.println("Enter the First name:");
                 String firstName = scanner.next();
-                while (!searchPersonInTheAddressBook(addressBook_Name, firstName)) {
+                while (!PersonUniquenessWhileAddingInTheAddressBook(addressBook_Name, firstName)) {
                     System.out.println("Person already present!\n");
                     firstName = scanner.next();
-                    searchPersonInTheAddressBook(addressBook_Name, firstName);
+                    PersonUniquenessWhileAddingInTheAddressBook(addressBook_Name, firstName);
                 }
                 person.setFirstname(firstName);
                 System.out.println("Enter the Last name:");
@@ -151,11 +151,51 @@ public class AddressBook {
     }
 
     /* Search Person By AddressBook Name And FirstName */
-    public boolean searchPersonInTheAddressBook(String addressBookName, String firstName) {
+    public boolean PersonUniquenessWhileAddingInTheAddressBook(String addressBookName,
+                                                               String firstName) {
 
         return myAddressBookDict.get(addressBookName).stream()
                     .filter(record -> record.getFirstname().equals(firstName))
                     .findFirst().isEmpty();
+    }
+
+    /* Search Person By City Or State */
+    public void searchPersonInACityOrState() {
+        Set<String> keySet = myAddressBookDict.keySet();
+        System.out.println("Choose Operation Search By City Or State");
+        System.out.println("1.City\t 2.State\t 3.Back");
+        switch (scanner.nextInt()) {
+            case 1 :
+                personInCityOrState = new ArrayList<>();
+                System.out.println("Enter City:");
+                Object city =  scanner.next();
+                for (String code : keySet) {
+                     myAddressBookDict.get(code).stream().forEach(person -> {
+                         if (person.getCity().equals(city)) {
+                              personInCityOrState.add(person.getFirstname());
+                         }
+                     });
+                }
+                    System.out.println("search Person In A City:" + city + ":" + personInCityOrState);
+                    System.out.println(personInCityOrState.size());
+                    break;
+            case 2 :
+                personInCityOrState = new ArrayList<>();
+                System.out.println("Enter State:");
+                Object state =  scanner.next();
+                for (String code : keySet) {
+                    myAddressBookDict.get(code).stream().forEach(person -> {
+                          if (person.getState().equals(state)) {
+                                personInCityOrState.add(person.getFirstname());
+                          }
+                    });
+                }
+                System.out.println("search Person In A State:" + state + ":" + personInCityOrState);
+                System.out.println(personInCityOrState.size());
+                break;
+            case 3:
+                break;
+        }
     }
 
     /* printAddressBookDict() Prints AddressBooks and Contacts in AddressBook */
@@ -176,7 +216,6 @@ public class AddressBook {
         }
     }
 
-
     /* staticEntries() Taking Static Entries to AddressBook */
     public void staticEntries() {
         LinkedList<Person> list = new LinkedList();
@@ -195,4 +234,5 @@ public class AddressBook {
         myAddressBookDict.put("addressBook", list);
         myAddressBookDict.put("addressBook1", list1);
     }
+
 }
