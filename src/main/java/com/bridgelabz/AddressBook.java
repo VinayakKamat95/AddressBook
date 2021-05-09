@@ -1,6 +1,7 @@
 package com.bridgelabz;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class AddressBook {
 
@@ -8,6 +9,7 @@ public class AddressBook {
      HashMap<String, LinkedList<Person>> myAddressBookDict = new HashMap<>(); //AddressBook Dictionary using Map
      ArrayList<String> personInCityOrState;
      HashMap<String, ArrayList> personInCityOrStateDict;
+    Set<String> keySet;
 
     /* createAddressBook() create AddressBook */
     public void createAddressBook() {
@@ -203,6 +205,18 @@ public class AddressBook {
             case 3:
                 break;
         }
+    }
+
+    public void countPersonInACityOrState() {
+        System.out.println("Enter City:");
+        String city = scanner.next();
+        AtomicInteger count= new AtomicInteger();
+        myAddressBookDict.keySet().stream().forEach(key-> myAddressBookDict.get(key)
+                 .stream().forEach(person ->{
+                     if(person.getCity().equals(city)){ count.getAndIncrement();
+                 }
+                }));
+        System.out.println(count);
     }
 
     /* printAddressBookDict() Prints AddressBooks and Contacts in AddressBook */
